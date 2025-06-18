@@ -104,7 +104,7 @@ header {
 
 .project, .space {
     box-sizing: border-box;
-    height: 1em;
+    height: 1.2em;
     display: flex;
     width: 100%;
     justify-content: space-between;
