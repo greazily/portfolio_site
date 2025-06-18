@@ -75,7 +75,7 @@ main {
     display: grid;
     box-sizing: border-box;
     justify-items: center;
-    height: 100vh;
+    height: 100dvh;
     width: 100vw;
     grid-template-rows: auto 1fr;
 }
