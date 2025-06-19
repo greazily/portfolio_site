@@ -2,7 +2,7 @@ gsap.registerPlugin(Draggable);
 
 const indicator = document.getElementById("indicator");
 const work = document.getElementById("work");
-let workHeight = work.getBoundingClientRect().height;
+let workHeight = work.offsetHeight;
 
 let loadingValue = document.querySelector(".loading-value");
 let canvas = document.querySelector("#canvas");
@@ -12,7 +12,7 @@ let videoLenghts = [0, 630, 1890, 2520, 3150, 3780];
 canvas.width = 1920;
 canvas.height = 1080;
 
-let frameCount = 5039;
+let frameCount = 5040;
 let currentFrame = index => (
   `img/frm/${(index).toString().padStart(5, "0")}.webp`
 );
@@ -105,7 +105,7 @@ function render() {
 }
 
 let imageSequencer = gsap.to(sequence, {
-  frame: frameCount,
+  frame: frameCount - 1,
   snap: "frame",
   ease: "none",
   paused: true,
@@ -141,15 +141,7 @@ Draggable.create(proxy, {
     indicator.t1.pause();
   },
   onDrag: function() {
-    //temporary fix that works but sends an error
-    if(this.y/workHeight > 0.999) {
-      indicator.t1.progress(0.999)
-    } else if (this.y/workHeight < 0.001){
-      indicator.t1.progress(0.01)
-    } else {
       indicator.t1.progress(this.y/workHeight);
-    }
-    // console.log(this.y/workHeight);
   },
   onDragEnd: function() {
       indicator.t1.play();
