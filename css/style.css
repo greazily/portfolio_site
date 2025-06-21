@@ -16,8 +16,8 @@
   }
 
 :root {
-    --color: hsl(0, 0%, 13%);
-    --color2: hsl(0, 0%, 96%);
+    --color: hsl(0, 0%, 85%);
+    --color2: hsl(0, 0%, 50%);
     --padding: 1.5rem;
 
 
@@ -98,7 +98,6 @@ header {
     position: relative;
     display: grid;
     width: 100%;
-    background: var(--color2);
     color: var(--color2);
     overflow: hidden;
     margin-bottom: var(--padding);
