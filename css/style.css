@@ -16,8 +16,8 @@
   }
 
 :root {
-    --color: hsl(0, 0%, 85%);
-    --color2: hsl(0, 0%, 50%);
+    --color: hsl(0, 0%, 90%);
+    --color2: hsl(0, 0%, 40%);
     --padding: 1.5rem;
 
 
@@ -70,7 +70,11 @@ h2:hover, h3:hover { cursor: default;}
 
 .title {
     width: 100%;
+    height: fit-content;
     margin-bottom: var(--padding);
+    background-color: red;
+  -webkit-mask: url(img/svg/title.svg) no-repeat center;
+  mask: url(img/svg/title.svg) no-repeat center;
 }
 
 main {
@@ -98,7 +102,7 @@ header {
     position: relative;
     display: grid;
     width: 100%;
-    color: var(--color2);
+    color: var(--color);
     overflow: hidden;
     margin-bottom: var(--padding);
 }
@@ -111,7 +115,7 @@ header {
     justify-content: space-between;
     align-items: center;
     gap: 1em;
-    mix-blend-mode: difference;
+    /* mix-blend-mode: difference; */
 }
 
 .buttons {
