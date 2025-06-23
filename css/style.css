@@ -70,11 +70,10 @@ h2:hover, h3:hover { cursor: default;}
 
 .title {
     width: 100%;
-    height: fit-content;
     margin-bottom: var(--padding);
-    background-color: red;
-  -webkit-mask: url(img/svg/title.svg) no-repeat center;
-  mask: url(img/svg/title.svg) no-repeat center;
+    /* background-color: red;
+    -webkit-mask: url(.img/svg/title.svg) no-repeat center;
+    mask: url(.img/svg/title.svg) no-repeat center; */
 }
 
 main {
