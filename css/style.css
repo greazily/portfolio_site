@@ -102,11 +102,13 @@ header {
     color: var(--color2);
     overflow: hidden;
     margin-bottom: var(--padding);
+    height: 9em;
+
 }
 
 .project, .space {
     box-sizing: border-box;
-    height: 1.2em;
+    height: 1.4em;
     display: flex;
     width: 100%;
     justify-content: space-between;

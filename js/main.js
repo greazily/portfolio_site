@@ -50,11 +50,8 @@ function onLoad() {
         onComplete: function(){
             verticalLoop(".project", {
                 repeat: -1,
-                speed: .01,
+                speed: 0.01,
                 draggable: true,
-                onUpdate: function(){
-                  console.log(fire);
-                }
               });
         }
       });    
