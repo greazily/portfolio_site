@@ -191,9 +191,10 @@ button:hover, .project.active > h2 {
 #indicator::after {
     content: '';
     display: block;
-    height: 1px;
     width: 50%;
+    height: 1px;
     background: var(--color);
+    transform: translateX(50%);
 }
 
 @media (min-width: 500px) {
