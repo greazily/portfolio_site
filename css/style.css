@@ -18,7 +18,7 @@
 :root {
     --color: hsl(0, 0%, 13%);
     --color2: hsl(0, 0%, 96%);
-    --padding: 1.5rem;
+    --padding: 2rem;
 
 
     font-family: 'regular';
@@ -42,14 +42,14 @@ button, input[type="submit"], input[type="reset"] {
 	outline: inherit;
 }
 
-body, h2, h3, p {
+body, h2, h3, h4, p {
     font-size: 1rem;
     font-weight: 400;
     margin: 0;
     padding: 0;
 }
 
-h2, h3, button{
+h2, h3, h4, button{
     text-transform: uppercase;
 }
 
@@ -67,6 +67,7 @@ h2, button {
 }
 
 h2:hover, h3:hover { cursor: default;}
+
 
 .title {
     width: 100%;
@@ -88,7 +89,7 @@ header {
     justify-items: center;
     max-width: 470px;
     padding-inline: 20px;
-    padding-block: var(--padding) calc(var(--padding) / 2);
+    padding-block: calc(var(--padding) );
     box-sizing: border-box;
     background: var(--color2);
 }
@@ -100,7 +101,7 @@ header {
     width: 100%;
     background: var(--color2);
     color: var(--color2);
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-bottom: var(--padding);
 }
 
@@ -161,9 +162,9 @@ button:hover, .project.active > h2 {
     box-sizing: border-box;
     position: absolute;
     height: 1rem;
-    width: 100%;
+    width: 50%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto;
     align-items: center;
     mix-blend-mode: difference;
     transform: translateY(-50%);
@@ -177,15 +178,15 @@ button:hover, .project.active > h2 {
 }
 
 .up-down {
-    margin-left: 0.3rem;
+    margin-left: 0.1rem;
     height: 1rem;
+    transform: translateX(50%);
 }
 
 @media (min-width: 500px) {
     :root {
-        --padding: 5px;
+        --padding: 10px;
         font-size: 11px;
-
     }
 
     body, h2, h3, p {
@@ -196,10 +197,6 @@ button:hover, .project.active > h2 {
 
     header {
         padding-block: calc(var(--padding) / 2);
-    }
-
-    .work {
-        margin-bottom: 0;
     }
 }
 
