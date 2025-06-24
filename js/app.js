@@ -1,9 +1,8 @@
 gsap.registerPlugin(Draggable);
 
 const indicator = document.getElementById("indicator");
-const work = document.getElementById("work");
-let workHeight = work.offsetHeight;
-
+let work = document.getElementById("work");
+let workHeight = getWorkHeight();
 let loadingValue = document.querySelector(".loading-value");
 let canvas = document.querySelector("#canvas");
 let context = canvas.getContext("2d");
@@ -31,6 +30,11 @@ for (let i = 0; i < frameCount; i++) {
   img.src = currentFrame(i);
   images.push(img);
 };
+window.onresize = getWorkHeight;
+function getWorkHeight() {
+  height = document.getElementById("work").offsetHeight
+  return height;
+}
 
 function progressChecker(progress) {
   if (progress >= 0 / frameCount && progress < videoLenghts[1] / frameCount){

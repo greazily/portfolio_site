@@ -101,7 +101,6 @@ header {
     width: 100%;
     background: var(--color2);
     color: var(--color2);
-    /* overflow: hidden; */
     margin-bottom: var(--padding);
 }
 
@@ -197,6 +196,10 @@ button:hover, .project.active > h2 {
 
     header {
         padding-block: calc(var(--padding) / 2);
+    }
+
+    .work {
+        margin-bottom: calc(var(--padding) / 2);
     }
 }
 
