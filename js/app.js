@@ -94,7 +94,10 @@ function resetArr() {
   for (let i = 0; i < executed.length; i++){executed[i] = false;}
 };
 
-function infoSet(index, column) {
+let column;
+function infoSet(index) {
+
+  console.log(column);
 
   let inactive = document.querySelectorAll(".project");
   let active = document.getElementById("n" + index);
@@ -127,14 +130,16 @@ function infoButtons(){
   let detailsBtn = document.getElementById("details");
   let insightBtn = document.getElementById("insight");
   detailsBtn.addEventListener("click", function(){
-    infoSet(executed.indexOf(true), 1);
+    infoSet(executed.indexOf(true));
+    column = 1;
     if(this.nextElementSibling.classList.contains("active")){
       this.nextElementSibling.classList.remove("active");
     };
     this.classList.toggle("active");
   });
   insightBtn.addEventListener("click", function(){
-    infoSet(executed.indexOf(true), 0);
+    infoSet(executed.indexOf(true));
+    column = 0;
     if(this.previousElementSibling.classList.contains("active")){
       this.previousElementSibling.classList.remove("active");
     };
