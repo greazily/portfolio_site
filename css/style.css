@@ -200,6 +200,12 @@ button:hover, button.active, .project.active > h2 {
     grid-area: info;
 }
 
+.information p {
+    margin-block: var(--padding);
+    text-align: justify;
+    text-align-last: center;
+}
+
 .information > div {
     overflow: hidden;
 }
