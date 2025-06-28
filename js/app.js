@@ -6,6 +6,7 @@ let workHeight = getWorkHeight();
 let loadingValue = document.querySelector(".loading-value");
 let canvas = document.querySelector("#canvas");
 let context = canvas.getContext("2d");
+let information = document.querySelector(".information");
 let videoLenghts = [0, 630, 1890, 2520, 3150, 3780];
 
 canvas.width = 1920;
@@ -30,7 +31,6 @@ for (let i = 0; i < frameCount; i++) {
   img.src = currentFrame(i);
   images.push(img);
 };
-window.onresize = getWorkHeight;
 function getWorkHeight() {
   height = document.getElementById("work").offsetHeight
   return height;
@@ -94,14 +94,44 @@ function resetArr() {
   for (let i = 0; i < executed.length; i++){executed[i] = false;}
 };
 
-function infoSet(index) {
+function infoSet(index, column) {
 
   let inactive = document.querySelectorAll(".project");
   let active = document.getElementById("n" + index);
+  let paragraph = document.querySelector(".information div p");
+  const insights = ["Hunterbrook info", "Sony Group info", "Data Desk info", "Alber Elbaz info", "MDX University info", "Miscellaneous info"];
+  const details = "Details info";
+
+  if(column == 1){
+    paragraph.innerHTML = details;
+  } else {
+    paragraph.innerHTML = insights[index];
+  }
+
+
 
   inactive.forEach((inactivate) => inactivate.classList.remove("active"));
   active.classList.add("active");
 }
+
+function infoButtons(){
+  let detailsBtn = document.getElementById("details");
+  let insightBtn = document.getElementById("insight");
+  detailsBtn.addEventListener("click", function(){
+    infoSet(executed.indexOf(true), 1);
+    if(this.nextElementSibling.classList.contains("active")){
+      this.nextElementSibling.classList.remove("active");
+    };
+    this.classList.toggle("active");
+  });
+  insightBtn.addEventListener("click", function(){
+    infoSet(executed.indexOf(true), 0);
+    if(this.previousElementSibling.classList.contains("active")){
+      this.previousElementSibling.classList.remove("active");
+    };
+    this.classList.toggle("active");
+  });
+};
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -160,6 +190,8 @@ Draggable.create(proxy, {
   bounds: { minY: 0, maxY: workHeight },
 });
 
+window.onresize = getWorkHeight;
+
 function onLoad() {
   imagesToLoad--;
   this.onload = null;
@@ -174,6 +206,7 @@ function onLoad() {
       autoAlpha: 0,
       onComplete: function(){
         indicator.t1.play();
+        infoButtons();
       }
     });    
   }

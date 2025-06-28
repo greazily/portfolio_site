@@ -72,6 +72,7 @@ h2:hover, h3:hover { cursor: default;}
 .title {
     width: 100%;
     margin-bottom: var(--padding);
+    grid-area: title;
 }
 
 main {
@@ -86,6 +87,13 @@ main {
 header {
     width: 100%;
     display: grid;
+    grid-template-areas: 
+        "title title"
+        "work work"
+        "details insight"
+        "info info"
+    ;
+    column-gap: 1em;
     justify-items: center;
     max-width: 470px;
     padding-inline: 20px;
@@ -102,6 +110,7 @@ header {
     background: var(--color2);
     color: var(--color2);
     margin-bottom: var(--padding);
+    grid-area: work;
 }
 
 .project, .space {
@@ -115,15 +124,17 @@ header {
     mix-blend-mode: difference;
 }
 
-.buttons {
-    box-sizing: border-box;
-    display: flex;
-    gap: 1em;
-    
+button:hover, button.active, .project.active > h2 {
+    font-variation-settings: "wght" 600;
 }
 
-button:hover, .project.active > h2 {
-    font-variation-settings: "wght" 600;
+#insight {
+    justify-self: start;
+    grid-area: insight;
+}
+#details {
+    justify-self: end;
+    grid: details;
 }
 
 .loading-container {
@@ -180,6 +191,21 @@ button:hover, .project.active > h2 {
     margin-left: 0.1rem;
     height: 1rem;
     transform: translateX(50%);
+}
+
+.information {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms;
+    grid-area: info;
+}
+
+.information > div {
+    overflow: hidden;
+}
+
+.active ~ .information {
+    grid-template-rows: 1fr;
 }
 
 @media (min-width: 500px) {
