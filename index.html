@@ -13,23 +13,38 @@
     <main>
         <header>
             <img class="title" src="img/svg/title.svg" alt="Mikael Dahlén">
-            <div class="work" id="work">
-                <div class="project" id="n0"><h2>Hunterbrook</h2><h3>New York, USA, 2024</h3></div>
-                <div class="project" id="n1"><h2>Sony Group</h2><h3>Multiple, 2022–25</h3></div>
-                <div class="space"><h3>"__</h3><h3>__"</h3></div>
-                <div class="project" id="n2"><h2>Data Desk</h2><h3>London, UK, 2023</h3></div>
-                <div class="project" id="n3"><h2>Alber Elbaz</h2><h3>London, UK, 2022</h3></div>
-                <div class="project" id="n4"><h2>MDX University</h2><h3>London, UK, 2022</h3></div>
-                <div class="project" id="n5"><h2>Miscellaneous</h2><h3>Multiple, 2020–25</h3></div>
-                <div class="space"><h3>"__</h3><h3>__"</h3></div>
-                <div id="indicator">
-                    <img class="up-down" src="img/svg/up_down_white.svg" alt="Up and Down Arrows">
-                </div>
-            </div>
-            <button id="details">Details</button>
-            <button id="insight">Insight</button>
+            <button class="button">About</button>
             <div class="information">
                 <div><p></p></div>
+            </div>
+            <div class="marquee" id="marquee">
+                <div class="track">
+                    <div class="item">
+                        <h2>Data Desk</h2>
+                    </div>
+                            <div class="item">
+                        <h2>Hunterbrook</h2>
+                    </div>
+                            <div class="item">
+                        <h2>Sony Group</h2>
+                    </div>
+                            <div class="item">
+                        <h2>Alber Elbaz</h2>
+                    </div>
+                            <div class="item">
+                        <h2>MDX University</h2>
+                    </div>
+                            <div class="item">
+                        <h2>Miscellaneous</h2>
+                    </div>
+                </div>
+            </div>
+            <button class="button">Info</button>
+            <div class="information">
+                <div>
+                    <h3></h3>
+                    <p></p>
+                </div>
             </div>
         </header>
         <div class="canvas-container">
@@ -38,6 +53,7 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

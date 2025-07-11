@@ -72,7 +72,6 @@ h2:hover, h3:hover { cursor: default;}
 .title {
     width: 100%;
     margin-bottom: var(--padding);
-    grid-area: title;
 }
 
 main {
@@ -87,55 +86,19 @@ main {
 header {
     width: 100%;
     display: grid;
-    grid-template-areas: 
-        "title title"
-        "work work"
-        "details insight"
-        "info info"
-    ;
     column-gap: 1em;
     justify-items: center;
-    max-width: 470px;
+    max-width: 200px;
     padding-inline: 20px;
     padding-block: calc(var(--padding) );
     box-sizing: border-box;
     background: var(--color2);
 }
 
-.work {
-    box-sizing: border-box;
-    position: relative;
-    display: grid;
-    width: 100%;
-    background: var(--color2);
-    color: var(--color2);
-    margin-bottom: var(--padding);
-    grid-area: work;
-}
-
-.project, .space {
-    box-sizing: border-box;
-    height: 1.2em;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1em;
-    mix-blend-mode: difference;
-}
-
 button:hover, button.active, .project.active > h2 {
     font-variation-settings: "wght" 600;
 }
 
-#insight {
-    justify-self: start;
-    grid-area: insight;
-}
-#details {
-    justify-self: end;
-    grid: details;
-}
 
 .loading-container {
     font-size: 1.4rem;
@@ -168,36 +131,10 @@ button:hover, button.active, .project.active > h2 {
     object-fit: cover;
 }
 
-#indicator {
-    box-sizing: border-box;
-    position: absolute;
-    height: 1rem;
-    width: 50%;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    mix-blend-mode: difference;
-    transform: translateY(-50%);
-}
-
-#indicator::before {
-    content: '';
-    display: block;
-    height: 1rem;
-    background: var(--color2);
-}
-
-.up-down {
-    margin-left: 0.1rem;
-    height: 1rem;
-    transform: translateX(50%);
-}
-
 .information {
     display: grid;
     grid-template-rows: 0fr;
     transition: grid-template-rows 300ms;
-    grid-area: info;
 }
 
 .information p {
@@ -212,6 +149,34 @@ button:hover, button.active, .project.active > h2 {
 
 .active ~ .information {
     grid-template-rows: 1fr;
+}
+
+.marquee {
+	overflow: hidden;
+	max-width: calc(90px * 4);
+    height: 10px;
+}
+.track {
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    justify-items: flex-start;
+} 
+.item {
+    height: 100%;
+    border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    position: relative;
+    display: flex;
+    font-size: 10px;
+    width: 90px;
+    flex-shrink: 0;
+    will-change: transform;
 }
 
 @media (min-width: 500px) {
