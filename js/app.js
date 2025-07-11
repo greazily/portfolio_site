@@ -97,7 +97,6 @@ function resetArr() {
 let column;
 function infoSet(index) {
 
-  console.log(column);
 
   let inactive = document.querySelectorAll(".project");
   let active = document.getElementById("n" + index);
