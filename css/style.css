@@ -155,17 +155,23 @@ button:hover, button.active, .project.active > h2 {
 	overflow: hidden;
 	max-width: calc(90px * 4);
     height: 10px;
+    display: flex;
+    justify-content: center;
 }
 .track {
+    display: flex;
+    position: relative;
+    width: fit-content;
     height: 100%;
+}
+.part {
+    height: 100%;
+    width: fit-content;
     position: relative;
     display: flex;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    justify-items: flex-start;
 } 
 .item {
+    box-sizing: border-box;
     height: 100%;
     border-right: 1px solid black;
     display: flex;
