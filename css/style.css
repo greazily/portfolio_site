@@ -88,7 +88,6 @@ header {
     display: grid;
     row-gap: var(--gap);
     justify-items: center;
-    margin-inline: 2rem;
     padding-block: var(--gap);
     box-sizing: border-box;
     background: var(--color2);
