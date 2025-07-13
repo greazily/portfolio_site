@@ -16,13 +16,15 @@
   }
 
 :root {
-    --color: hsl(0, 0%, 13%);
-    --color2: hsl(0, 0%, 96%);
+    --color: hsl(0, 0%, 86%);
+    --colorA: hsla(0, 0%, 100%, 0.2);
+    --color2: hsl(0, 0%, 26%);
     --padding: 2rem;
+    --width: 100px;
 
 
     font-family: 'regular';
-    font-size: 12px;
+    font-size: 10px;
     font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,7 +55,7 @@ h2, h3, button{
     text-transform: uppercase;
 }
 
-h2, h3 {
+h2, h3, button {
     box-sizing: border-box;
     padding-top: 0.1em;
     vertical-align: middle;
@@ -66,12 +68,9 @@ h2, button {
     transition: font-variation-settings 400ms ease-in-out;
 }
 
-h2:hover, h3:hover { cursor: default;}
-
-
 .title {
     width: 100%;
-    margin-bottom: var(--padding);
+    max-width: 160px;
 }
 
 main {
@@ -84,21 +83,127 @@ main {
 }
 
 header {
-    width: 100%;
+    width: fit-content;
+	max-width: calc(var(--width) * 6);
     display: grid;
-    column-gap: 1em;
+    row-gap: 1rem;
     justify-items: center;
-    max-width: 200px;
-    padding-inline: 20px;
-    padding-block: calc(var(--padding) );
+    margin-inline: 2rem;
+    padding-block: 1rem;
     box-sizing: border-box;
     background: var(--color2);
 }
 
-button:hover, button.active, .project.active > h2 {
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1rem;
+    
+}
+
+button:hover {
+    text-decoration: underline;
+}
+
+button::before {
+    display: block;
+}
+
+button.active.about::before, button.active.info::before {
+    content: "X";
+}
+
+button.about::before {
+    content: "about";
+}
+
+button.info::before {
+    content: "info";
+}
+
+
+
+.item.active h2{
     font-variation-settings: "wght" 600;
 }
 
+.information {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 300ms;
+}
+
+.information p {
+    margin-top: 1rem;
+    text-align: justify;
+    text-align-last: center;
+    max-width: calc(var(--width) * 4);
+}
+
+.information > div {
+    overflow: hidden;
+}
+.active {
+    content: "X";
+}
+.active ~ .information {
+    grid-template-rows: 1fr;
+}
+
+.expander {
+    display: grid;
+    justify-content: center;
+}
+
+.expander:nth-of-type(1){
+    margin-bottom: 2rem;
+}
+
+.arrow {
+    height: 7px;
+}
+
+.marquee, .track, .item, .part {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+.marquee, .item {
+    justify-content: center;
+}
+
+.marquee {
+	overflow: hidden;
+    width: 100%;
+    height: 1rem;
+}
+.track {
+    width: fit-content;
+    height: 100%;
+}
+.part {
+    height: 100%;
+    width: fit-content;
+} 
+.item {
+    height: 70%;
+    border-right: 1px solid var(--colorA);
+    width: var(--width);
+    flex-shrink: 0;
+    will-change: transform;
+}
+
+.item.wide {
+    width: calc(var(--width) * 2);
+}
+
+.marquee-container {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+}
 
 .loading-container {
     font-size: 1.4rem;
@@ -131,60 +236,6 @@ button:hover, button.active, .project.active > h2 {
     object-fit: cover;
 }
 
-.information {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 300ms;
-}
-
-.information p {
-    margin-block: var(--padding);
-    text-align: justify;
-    text-align-last: center;
-}
-
-.information > div {
-    overflow: hidden;
-}
-
-.active ~ .information {
-    grid-template-rows: 1fr;
-}
-
-.marquee {
-	overflow: hidden;
-	max-width: calc(90px * 4);
-    height: 10px;
-    display: flex;
-    justify-content: center;
-}
-.track {
-    display: flex;
-    position: relative;
-    width: fit-content;
-    height: 100%;
-}
-.part {
-    height: 100%;
-    width: fit-content;
-    position: relative;
-    display: flex;
-} 
-.item {
-    box-sizing: border-box;
-    height: 100%;
-    border-right: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    position: relative;
-    display: flex;
-    font-size: 10px;
-    width: 90px;
-    flex-shrink: 0;
-    will-change: transform;
-}
-
 @media (min-width: 500px) {
     :root {
         --padding: 10px;
@@ -197,13 +248,14 @@ button:hover, button.active, .project.active > h2 {
         padding: 0;
     }
 
-    header {
-        padding-block: calc(var(--padding) / 2);
-    }
+    .expander:nth-of-type(1){
+        margin-bottom: 0rem;
+    }   
 
     .work {
         margin-bottom: calc(var(--padding) / 2);
     }
+
 }
 
 @keyframes test {

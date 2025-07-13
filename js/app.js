@@ -98,7 +98,7 @@ function infoSet(index) {
 
   let inactive = document.querySelectorAll(".project");
   let active = document.getElementById("n" + index);
-  let paragraph = document.querySelector(".information div p");
+  let paragraph = document.querySelector(".info ~ .information div p");
   const insights = [
     "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.", 
     "No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.", 
@@ -107,31 +107,31 @@ function infoSet(index) {
     "But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?", 
     "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain."
   ];
-  const details = 
-  "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
-  ;
 
-  if(column == 1){
-    paragraph.innerHTML = details;
-  } else {
-    paragraph.innerHTML = insights[index];
-  }
+  paragraph.innerHTML = insights[index];
 
-
-
-  inactive.forEach((inactivate) => inactivate.classList.remove("active"));
-  active.classList.add("active");
+  // inactive.forEach((inactivate) => inactivate.classList.remove("active"));
+  // active.classList.add("active");
 }
 
 function infoButtons(){
   let buttons = document.querySelectorAll("button");
   buttons.forEach((button) => {
     button.addEventListener("click", function(){
-      infoSet(executed.indexOf(true));
       this.classList.toggle("active");
     });
   });
 };
+
+function partAdder() {
+  for (let i = 0; i < 2; i++) {
+    let partClone = part.cloneNode(true);
+    track.appendChild(partClone);
+  }
+
+}
+
+partAdder();
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -149,15 +149,9 @@ let imageSequencer = gsap.to(sequence, {
 track.t1 = gsap.timeline({
   paused: true,
   repeat: -1, 
-  onStart() {
-    console.log('start')
-  },
   onUpdate() {
     imageSequencer.progress(this.progress());
-    // progressChecker(this.progress());
-  },
-  onComplete() {
-    console.log('complete', images);
+    progressChecker(this.progress());
   }
 })
 .to(".track", {
@@ -176,27 +170,23 @@ Draggable.create(proxy, {
     track.t1.pause();
   },
   onDrag: function() {
-    let x = this.x * -1;
+    let x = (this.x * -1) % part.offsetWidth;
     if( x < 0 ) {
         track.t1.progress(x/part.offsetWidth + 1);
-        // console.log(x, x/part.offsetWidth + 1);
+        // console.log(this.x, x % part.offsetWidth, x/part.offsetWidth);
       } else {
         track.t1.progress(x/part.offsetWidth);
-        // console.log(x, x/part.offsetWidth);
       }
   },
   onDragEnd: function() {
     track.t1.play();
-
   },
   onPress: function() {
-    let x = this.x * -1;
     gsap.set(this.target, {
-      x: (x * -1) * part.offsetWidth
+      x: gsap.getProperty(track, "x")
     });
     this.update();
-  },
-  bounds: { minX: -1 * part.offsetWidth, maxX: part.offsetWidth},
+  }
 });
 
 
