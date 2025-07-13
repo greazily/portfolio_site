@@ -84,7 +84,7 @@ main {
 
 header {
     width: fit-content;
-	max-width: 540px;
+	max-width: calc(var(--width) * 8);
     display: grid;
     row-gap: var(--gap);
     justify-items: center;
@@ -155,9 +155,9 @@ button.info::before {
 }
 
 .arrow {
-    height: calc(var(--gap) * 0.6);
+    height: 0.6rem;
     margin-top: calc(var(--gap) * 2);
-    margin-bottom: calc(var(--gap) / 5);
+    margin-bottom: 0.1rem;
 }
 
 .marquee, .track, .item, .part {
@@ -230,13 +230,6 @@ button.info::before {
     :root {
         --gap: 0.5rem;
         font-size: 11px;
-
-    }
-
-    body, h2, h3, p {
-        font-weight: 400;
-        margin: 0;
-        padding: 0;
     }
 
     button:hover {
