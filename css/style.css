@@ -19,7 +19,7 @@
     --color: hsl(0, 0%, 86%);
     --colorA: hsla(0, 0%, 100%, 0.2);
     --color2: hsl(0, 0%, 26%);
-    --padding: 2rem;
+    --gap: 0.5rem;
     --width: 100px;
 
 
@@ -70,7 +70,7 @@ h2, button {
 
 .title {
     width: 100%;
-    max-width: 160px;
+    max-width: 150px;
 }
 
 main {
@@ -86,10 +86,10 @@ header {
     width: fit-content;
 	max-width: calc(var(--width) * 6);
     display: grid;
-    row-gap: 1rem;
+    row-gap: var(--gap);
     justify-items: center;
     margin-inline: 2rem;
-    padding-block: 1rem;
+    padding-block: var(--gap);
     box-sizing: border-box;
     background: var(--color2);
 }
@@ -122,8 +122,6 @@ button.info::before {
     content: "info";
 }
 
-
-
 .item.active h2{
     font-variation-settings: "wght" 600;
 }
@@ -135,7 +133,7 @@ button.info::before {
 }
 
 .information p {
-    margin-top: 1rem;
+    margin-top: calc(var(--gap) * 0.6);
     text-align: justify;
     text-align-last: center;
     max-width: calc(var(--width) * 4);
@@ -161,7 +159,9 @@ button.info::before {
 }
 
 .arrow {
-    height: 7px;
+    height: var(--gap);
+    margin-top: calc(var(--gap) * 2);
+    margin-bottom: calc(var(--gap) / 5);
 }
 
 .marquee, .track, .item, .part {
@@ -199,12 +199,6 @@ button.info::before {
     width: calc(var(--width) * 2);
 }
 
-.marquee-container {
-    display: grid;
-    justify-items: center;
-    gap: 0.5rem;
-}
-
 .loading-container {
     font-size: 1.4rem;
     box-sizing: border-box;
@@ -238,7 +232,6 @@ button.info::before {
 
 @media (min-width: 500px) {
     :root {
-        --padding: 10px;
         font-size: 11px;
     }
 
@@ -253,7 +246,7 @@ button.info::before {
     }   
 
     .work {
-        margin-bottom: calc(var(--padding) / 2);
+        margin-bottom: calc(var(--gap) / 2);
     }
 
 }
