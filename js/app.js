@@ -95,27 +95,27 @@ function resetArr() {
 
 function infoSet(index) {
 
-
-  let inactive = document.querySelectorAll(".project");
-  let active = document.getElementById("n" + index);
-  let paragraph = document.querySelector(".info ~ .information div p");
+  let inactive = document.querySelectorAll(".item");
+  let active = document.querySelectorAll(".i" + index);
+  let paragraph = document.querySelector(".expander.info .information div p");
   const insights = [
-    "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.", 
+    "Hunterbrook Media is a newsroom dedicated to uncovering under-reported stories and holding bad actors to account without ads or paywalls, instead funding its work through litigation partnerships and strategic investments through its financial arm based on its reporting. Their investigations have appeared in <i>The New Yorker, The Financial Times, POLITICO, The Wall Street Journal,</i> and more.<br><br>Hunterbrook needed a brand that reflected their mission—bringing visibility to under-reported stories and holding bad actors to account—while resonating with its core audience: portfolio managers who value urgency, credibility, and personality by way of subtle flare. I built the identity around a dark-to-light transition to symbolize this mission, paired with a condensed logotype inspired by Vignelli’s proposal for <i>The European Journal</i> to convey urgency and old-school credibility. An abbreviated, ticker-inspired mark nods to their financial focus and influence, while the impactful blue echoes the audience’s sense of style, bringing all elements together with clarity and focus.", 
     "No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.", 
-    "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.", 
-    "To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it?", 
-    "But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?", 
+    "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.",
+    "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.",
+    "Data Desk offers NGOs, think tanks, and media outlets investigative research and analysis that provides insight into the global oil and gas sector. <br><br>Previously they have worked on stories published by The Washington Post, The Guardian, Bloomberg and Le Monde among others. For instance, identifying sanctions-busting shipments of jet fuel to Myanmar via a Vietnamese tank terminal.<br><br>The challenge I was faced with was the emergence of two distinct audiences at once—one that values scientific rigor, and another drawn to the cutting edge of philanthropic innovation?<br><br>To resolve this tension, I leaned into a paradox at the heart of data itself: it represents something concrete, yet it is often experienced as abstract or intangible. That duality became the foundation of the visual concept, leading me to explore impossible geometry—forms that visually capture both precision and ambiguity.<br><br>For typographic clarity, I chose Inter, but modified the wordmark to move away from its default utilitarian tone. The result is a typographic voice that feels authoritative yet understated—rooted in logic, but with a quiet confidence that appeals across audiences.", 
     "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain."
   ];
 
   paragraph.innerHTML = insights[index];
+  console.log("Active", active, "Inactive", inactive)
 
-  // inactive.forEach((inactivate) => inactivate.classList.remove("active"));
-  // active.classList.add("active");
+  inactive.forEach((inactivate) => inactivate.classList.remove("active"));
+  active.forEach((activate) => activate.classList.add("active"));
 }
 
 function infoButtons(){
-  let buttons = document.querySelectorAll("button");
+  let buttons = document.querySelectorAll(".expander");
   buttons.forEach((button) => {
     button.addEventListener("click", function(){
       this.classList.toggle("active");
