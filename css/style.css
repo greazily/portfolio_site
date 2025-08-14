@@ -13,12 +13,12 @@
 :root {
     --color: 0, 0%, 86%;
     --color2: 0, 0%, 26%;
-    --gap: 1rem;
+    --gap: 0.5rem;
     --width: 100px;
 
 
     font-family: 'variable';
-    font-size: 10px;
+    font-size: 12px;
     font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,6 +53,10 @@ h2, h3, button {
     padding-top: 0.15em;
     vertical-align: middle;
     line-height: 0;
+}
+
+.about button {
+    padding-top: 0;
 }
 
 h2, button {
@@ -124,9 +128,11 @@ div.expander.active button::before {
     text-align-last: center;
     hyphens: auto;
     font-size: 1.1rem;
-    margin-block: calc(var(--gap) * 0.6);
-    margin-inline: calc(var(--gap) * 2);
-    max-width: calc(var(--width) * 4);
+    margin: var(--gap);
+    padding: var(--gap) calc(var(--gap) * 1.5) ;
+    /* margin-bottom: calc(var(--gap) * 2); */
+    background-color: hsl(var(--color));
+    color: hsl(var(--color2));
 }
 
 .information > div {
@@ -144,7 +150,7 @@ div.expander.active button::before {
 }
 
 .expander.active {
-    padding-block: calc(var(--gap) * 2);
+    /* padding-block: calc(var(--gap) * 2); */
 }
 
 .expander:nth-of-type(1){
@@ -181,21 +187,23 @@ div.expander.active button::before {
     width: fit-content;
 } 
 .item {
-    height: 70%;
-    border-right: 1px solid hsla(var(--color), 0.3);
+    display: flex;
+    height: 100%;
+    border-right: 2px solid hsl(var(--color2));
     width: var(--width);
     flex-shrink: 0;
     will-change: transform;
+    background-color: hsla(var(--color), 0.05);
+    transition: all 400ms 200ms ease-in-out;
+}
+
+.item.active{
+    color: hsl(var(--color2));
+    background-color: hsla(var(--color), 1);
 }
 
 .item h2 {
-    /* font-size: 0.9rem; */
-    transition: all 300ms;
-}
-
-.item.active h2{
-    color: hsla(var(--color), 1);
-    font-variation-settings: "wght" 900;
+    margin-top: -0.06em;
 }
 
 .item.wide {
@@ -235,21 +243,15 @@ div.expander.active button::before {
 
 @media (min-width: 500px) {
     :root {
-        --gap: 0.5rem;
         font-size: 11px;
     }
 
-    .expander:nth-of-type(1){
+    .expander.about{
         margin-bottom: 0rem;
-    }   
-
-    .work {
-        margin-bottom: calc(var(--gap) / 2);
     }
 
-}
+    .information p {
+        margin-inline: calc(var(--gap) * 0);
+    }
 
-@keyframes test {
-    0%{font-variation-settings: "wght" 400;}
-    100%{font-variation-settings: "wght" 600;}
 }
