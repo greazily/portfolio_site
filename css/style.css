@@ -129,8 +129,7 @@ div.expander.active button::before {
     hyphens: auto;
     font-size: 1.1rem;
     margin: var(--gap);
-    padding: var(--gap) calc(var(--gap) * 1.5) ;
-    /* margin-bottom: calc(var(--gap) * 2); */
+    padding: calc(var(--gap) * 2.5) calc(var(--gap) * 2) ;
     background-color: hsl(var(--color));
     color: hsl(var(--color2));
 }
@@ -149,18 +148,13 @@ div.expander.active button::before {
     transition: padding-block 400ms;
 }
 
-.expander.active {
-    /* padding-block: calc(var(--gap) * 2); */
-}
-
-.expander:nth-of-type(1){
+.expander.about{
     margin-bottom: 2rem;
 }
 
 .arrow {
     height: 0.6rem;
     margin-top: calc(var(--gap) * 2);
-    margin-bottom: 0.1rem;
 }
 
 .marquee, .track, .item, .part {
