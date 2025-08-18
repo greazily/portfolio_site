@@ -1,9 +1,4 @@
 @font-face {
-    font-family: 'title';
-    src: url('font/SpecialGothicExpandedOne-Regular.ttf') format("truetype"),
-}
-
-@font-face {
     font-family: 'variable';
     src: url('font/ClashGrotesk-Variable.woff2') format("woff2 supports variations"),
          url('font/ClashGrotesk-Variable.woff2') format("woff2-variations");
@@ -207,7 +202,7 @@ div.expander.active button {
 }
 
 .item.wide {
-    width: calc(var(--width) * 2);
+    width: calc(var(--width) * 2.105);
 }
 
 .loading-container {
