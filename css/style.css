@@ -1,9 +1,4 @@
 @font-face {
-    font-family: 'title';
-    src: url('font/SpecialGothicExpandedOne-Regular.ttf') format("truetype"),
-}
-
-@font-face {
     font-family: 'variable';
     src: url('font/ClashGrotesk-Variable.woff2') format("woff2 supports variations"),
          url('font/ClashGrotesk-Variable.woff2') format("woff2-variations");
@@ -44,7 +39,7 @@ body, h2, h3, p {
     padding: 0;
 }
 
-h2, h3, button{
+h2, h3, button, span{
     text-transform: uppercase;
 }
 
@@ -108,7 +103,7 @@ div.expander.active button::before {
 }
 
 div.expander.active button {
-    padding-top: var(--gap);
+    padding-top: calc(var(--gap) * 2);
 }
 
 .expander.about button::before {
@@ -125,23 +120,29 @@ div.expander.active button {
     transition: grid-template-rows 400ms;
 }
 
-.information p {
+.text {
+    overflow: hidden;
+    box-sizing: border-box;
     text-align: center;
+    display: grid;
     text-wrap: pretty;
     hyphens: auto;
-    font-size: 1.1rem;
-    padding-top: calc(var(--gap)/2);
+    gap: calc(var(--gap) * 1.5);
     padding-inline: calc(var(--gap) * 2.5);
-    padding-bottom: var(--gap);
-    max-width: calc(var(--width) * 5);
 }
 
-.information > div {
-    overflow: hidden;
+.text p {
+    text-align: justify;
+    text-align-last: center;
+    font-size: 1.1rem;
 }
 
 .expander.active .information {
     grid-template-rows: 1fr;
+    
+}
+.expander.info.active {
+    padding-block: calc(var(--gap)) calc(var(--gap) * 1.5);
 }
 
 .expander {
@@ -155,12 +156,11 @@ div.expander.active button {
 }
 
 .expander.about{
-    margin-bottom: 2rem;
+    margin-bottom: calc(var(--gap) * 6);
 }
 
 .arrow {
     height: 0.6rem;
-    margin-top: calc(var(--gap) * 2);
 }
 
 .marquee, .track, .item, .part {
@@ -189,11 +189,11 @@ div.expander.active button {
 .item {
     display: flex;
     height: 100%;
-    border-right: 2px solid hsl(var(--color2));
+    border-inline: 1px solid hsl(var(--color2));
     width: var(--width);
     flex-shrink: 0;
     will-change: transform;
-    background-color: hsla(var(--color), 0.05);
+    background-color: hsla(var(--color), 0.07);
     transition: all 400ms 200ms ease-in-out;
 }
 
@@ -207,7 +207,7 @@ div.expander.active button {
 }
 
 .item.wide {
-    width: calc(var(--width) * 2);
+    width: calc(var(--width) * 2.105);
 }
 
 .loading-container {
@@ -247,13 +247,11 @@ div.expander.active button {
     }
 
     .expander.about{
-        margin-bottom: 0rem;
+        margin-bottom: calc(var(--gap) * 3);
     }
 
-    .information p {
-        padding-top: 0;
+    .text {
         padding-inline: 0;
-
     }
 
 }

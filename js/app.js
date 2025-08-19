@@ -8,14 +8,16 @@ let loadingValue = document.querySelector(".loading-value");
 let canvas = document.querySelector("#canvas");
 let context = canvas.getContext("2d");
 let information = document.querySelector(".information");
-let videoLenghts = [0, 630, 1890, 2520, 3150, 3780];
+let videoLenghts = [0, 570, 1140, 2340, 2910, 3480];
+let executed = [false, false, false, false, false, false];
+let activeInfo = 0;
 
-console.log(part.offsetWidth);
+
 
 canvas.width = 1920;
 canvas.height = 1080;
 
-let frameCount = 5040;
+let frameCount = 4679;
 let currentFrame = index => (
   `img/frm/${(index).toString().padStart(5, "0")}.webp`
 );
@@ -35,7 +37,21 @@ for (let i = 0; i < frameCount; i++) {
   images.push(img);
 };
 
+function indexOfActive() {
+  let info = document.querySelector(".expander.info");
+  if (info.classList.contains("active")) {
+    activeInfo = executed.indexOf(true);
+  }
+};
+
+function infoLoop(progress) {
+  if((videoLenghts[activeInfo + 1] / frameCount).toFixed(3) == progress.toFixed(3)){
+    track.t1.progress(videoLenghts[activeInfo] / frameCount);
+  }
+};
+
 function progressChecker(progress) {
+  let infoBtn = document.querySelector(".expander.info");
   if (progress >= 0 / frameCount && progress < videoLenghts[1] / frameCount){
     projectChanger(0);
   }
@@ -54,9 +70,18 @@ function progressChecker(progress) {
   else if (progress >= videoLenghts[5] / frameCount && progress < frameCount){
     projectChanger(5);
   } 
+
+  if (infoBtn.classList.contains("active")) {
+    infoLoop(progress);
+  }
 };
-executed = [false, false, false, false, false, false];
+
+
 function projectChanger(number) {
+  let infoBtn = document.querySelector(".expander.info");
+  if (infoBtn.classList.contains("active")) {
+    infoLoop(number);
+  }
   if(number == 0 && !executed[0]){
     resetArr()
     executed[0] = true;
@@ -87,6 +112,8 @@ function projectChanger(number) {
     executed[5] = true;
     infoSet(number);
   }
+
+
 };
 
 function resetArr() {
@@ -97,32 +124,35 @@ function infoSet(index) {
 
   let inactive = document.querySelectorAll(".item");
   let active = document.querySelectorAll(".i" + index);
-  let paragraph = document.querySelector(".expander.info .information div p");
+  let paragraph = document.querySelector(".expander.info .text");
   const insights = [
-    "Hunterbrook Media is a newsroom dedicated to uncovering under-reported stories and holding bad actors to account without ads or paywalls, instead funding its work through litigation partnerships and strategic investments through its financial arm based on its reporting. Their investigations have appeared in <i>The New Yorker, The Financial Times, POLITICO, The Wall Street Journal,</i> and more.<br><br>Hunterbrook needed a brand that reflected their mission—bringing visibility to under-reported stories and holding bad actors to account—while resonating with its core audience: portfolio managers who value urgency, credibility, and personality by way of subtle flare. I built the identity around a dark-to-light transition to symbolize this mission, paired with a condensed logotype inspired by Vignelli’s proposal for <i>The European Journal</i> to convey urgency and old-school credibility. An abbreviated, ticker-inspired mark nods to their financial focus and influence, while the impactful blue echoes the audience’s sense of style, bringing all elements together with clarity and focus.", 
-    "For a proposed rebrand of Sony Electronics, I explored a broader brand consolidation, aiming to bring coherence to the fragmented visual landscape across Sony’s sub-brands. I retained the original Sony logotype, honoring its legacy and global recognition, and focused on building a flexible system around it.<br><br>Rooted in Sony’s mission—“Fill the world with emotion, through the power of creativity and technology”—the identity balances these two forces. A perfect square anchors the system, symbolizing the precision and control of technology, while hand-painted forms—drawn from a Japanese artist breaking through constraint—represent the creative potential Sony’s products unlock. This idea is reinforced by dynamic fluid simulations that appear to burst from the products themselves. The color palette draws from the iconic Trinitron series, distilling its bold red, green, and blue into a modern reinterpretation. Within this system, Sony’s products become vessels: structured, intentional, and open, allowing creativity to flow through.",
+    "<span>Brand Identity, Web Design, Data Visualization</span><span>2023</span><p>Data Desk provides NGOs, think tanks, and media outlets with investigative research and analysis on the global oil and gas sector. Their work has appeared in <i>The Washington Post, The Guardian, Bloomberg, and Le Monde.</i> For instance—identifiing sanctions-busting shipments of jet fuel to Myanmar.</p><p>I was brought in to design their identity, website, data visualizations, and documents, with the challenge of appealing to two audiences: one seeking scientific rigor, the other drawn to innovative philanthropic approaches.</p><p>The solution embraced a paradox at the heart of data: it captures concrete realities, yet its representation often feels abstract and intangible. This duality became the foundation of the visual concept, inspiring impossible geometry that conveys certainty through disambiguation, while adjustable columns in the layout allow readers to navigate the information according to their perspective. The typeface Inter was chosen for its modern clarity, while the wordmark—customized with inspiration from Akzidenz Grotesk—balances authority with subtle personality, resulting in a confident, logical, yet approachable visual voice that resonates across both audiences.</p>",
 
-    "Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.",
+    "<span>Brand Identity, Web Design & Development</span><span>2024</span><p>Hunterbrook Media is a newsroom dedicated to uncovering under-reported stories and holding bad actors to account without ads or paywalls, instead funding its work through litigation partnerships and strategic investments through its financial arm based on its reporting. Their investigations have appeared in <i>The New Yorker, The Financial Times, POLITICO, The Wall Street Journal,</i> and more.</p><p>Hunterbrook needed a brand that reflected their mission—bringing visibility to under-reported stories and holding bad actors to account—while resonating with its core audience: portfolio managers who value urgency, credibility, and personality by way of subtle flare. I built the identity around a dark-to-light transition to symbolize this mission, paired with a condensed logotype inspired by Vignelli’s proposal for <i>The European Journal</i> to convey urgency and old-school credibility. An abbreviated, ticker-inspired mark nods to their financial focus and influence, while the impactful blue echoes the audience’s sense of style, bringing all elements together with clarity and focus.</p>",
 
-    "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.",
+    "<span>Brand Identity, Web Design, 3D Simulation</span><span>2022</span><p>For a proposed rebrand of Sony Electronics, I explored a broader brand consolidation, aiming to bring coherence to the fragmented visual landscape across Sony’s sub-brands. I retained the original Sony logotype, honoring its legacy and global recognition, and focused on building a flexible system around it.</p><p>Rooted in Sony’s mission—“Fill the world with emotion, through the power of creativity and technology”—the identity balances these two forces. A perfect square anchors the system, symbolizing the precision and control of technology, while hand-painted forms—drawn from a Japanese artist breaking through constraint—represent the creative potential Sony’s products unlock. This idea is reinforced by dynamic fluid simulations that appear to burst from the products themselves. The color palette draws from the iconic Trinitron series, distilling its bold red, green, and blue into a modern reinterpretation. Within this system, Sony’s products become vessels: structured, intentional, and open, allowing creativity to flow through.</p>",
 
-    "Data Desk offers NGOs, think tanks, and media outlets investigative research and analysis that provides insight into the global oil and gas sector. <br><br>Previously they have worked on stories published by The Washington Post, The Guardian, Bloomberg and Le Monde among others. For instance, identifying sanctions-busting shipments of jet fuel to Myanmar via a Vietnamese tank terminal.<br><br>The challenge I was faced with was the emergence of two distinct audiences at once—one that values scientific rigor, and another drawn to the cutting edge of philanthropic innovation?<br><br>To resolve this tension, I leaned into a paradox at the heart of data itself: it represents something concrete, yet it is often experienced as abstract or intangible. That duality became the foundation of the visual concept, leading me to explore impossible geometry—forms that visually capture both precision and ambiguity.<br><br>For typographic clarity, I chose Inter, but modified the wordmark to move away from its default utilitarian tone. The result is a typographic voice that feels authoritative yet understated—rooted in logic, but with a quiet confidence that appeals across audiences.",
-    
-    "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain."
+    "<span>Exhibition Design, Layout, Typesetting, Collage</span><span>2022</span><p>While I was working at Stinsensqueeze, I helped produce the identity for a posthumous exhibition celebrating the life and legacy of Alber Elbaz—the iconic former creative director of Lanvin and founder of AZ Factory.</p><p>Elbaz was known for his playful spirit, distinctive presence, and commitment to a more inclusive and human-focused fashion industry. The visual language aimed to reflect these qualities with warmth and clarity.</p><p>The identity features bold, expressive colors drawn from Elbaz’s personal palette, a rounded, blocky typeface that subtly mirrors his form and character, and layers of collage and hand-drawn sketches inspired by his fashion illustrations. The result is an identity that feels personal, joyful, and true to the designer’s legacy.</p>",
+
+    "<span>Brand Identity, Exhibition Design, Neural Network</span><span>2022</span>I lead a small team brought on to develop the identity for Middlesex University’s Degree Show, themed “Radical Creativity.” The exhibition spanned a wide range of disciplines—visual arts, performance, design, games and media—and the challenge lay in creating a system that could unify such diversity without flattening it.<br><br>To reflect this range, we gathered material from each course and developed our own image database. I then used a generative adversarial network (GAN) to generate an evolving set of images. I intentionally interrupted the training process once the outputs became abstract and amorphous—visual representations of “pure” creativity always changing. I then transitioned these images between each other creating morphed animations, symbolizing creativity as a living, shifting force. To anchor this visual fluidity, we paired the imagery with a brutalist geometric typeface—a structured counterbalance that gave the imagery both scaffolding and contrast.",
+
+    "This is a collection of select projects spanning different stages of my creative practice. It includes experimental interactive websites—taking the reader through my favorite passage from Carl Sagan, another exploring public perceptions of mental health medication—as well as my final major project, an identity system for children’s toys made from recycled pizza boxes.<br><br>More recently, I’ve explored laser-cut furniture design as a hands-on, material-focused hobby, extending my interest in function, form, and making."
   ];
 
   paragraph.innerHTML = insights[index];
-  console.log("Active", active, "Inactive", inactive)
 
   inactive.forEach((inactivate) => inactivate.classList.remove("active"));
   active.forEach((activate) => activate.classList.add("active"));
-}
+
+};
+
 
 function infoButtons(){
   let buttons = document.querySelectorAll(".expander");
   buttons.forEach((button) => {
     button.addEventListener("click", function(){
       this.classList.toggle("active");
+      indexOfActive();
     });
   });
 };
@@ -133,14 +163,12 @@ function partAdder() {
     track.appendChild(partClone);
   }
 
-}
-
-partAdder();
+};
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.drawImage(images[sequence.frame], 0, 0);
-}
+};
 
 let imageSequencer = gsap.to(sequence, {
   frame: frameCount - 1,
@@ -184,6 +212,7 @@ Draggable.create(proxy, {
   },
   onDragEnd: function() {
     track.t1.play();
+    indexOfActive();
   },
   onPress: function() {
     gsap.set(this.target, {
@@ -198,7 +227,7 @@ Draggable.create(proxy, {
 function onLoad() {
   imagesToLoad--;
   this.onload = null;
-  let percent = Math.round((frameCount - imagesToLoad) / frameCount * 100 * 2)
+  let percent = Math.round((frameCount - imagesToLoad) / frameCount * 100 * 3)
   if(percent <= 100){
     loadingValue.textContent = percent + "%";
   }
@@ -209,8 +238,9 @@ function onLoad() {
       autoAlpha: 0,
       onComplete: function(){
         track.t1.play();
-        infoButtons();
       }
     });    
   }
 }
+partAdder();
+infoButtons();
