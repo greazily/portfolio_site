@@ -24,6 +24,7 @@
 /* 2. Reset and Base Styles */
 body, h2, h3, p {
     font-size: 1rem;
+    font-weight: 400;
     margin: 0;
     padding: 0;
 }
@@ -39,11 +40,11 @@ button, input[type="submit"], input[type="reset"] {
     height: 1rem;
 }
 
-h2, h3, button, span {
+h2, button {
     text-transform: uppercase;
 }
 
-h2, h3, button {
+h2, button {
     box-sizing: border-box;
     padding-top: 0.15em;
     vertical-align: middle;
@@ -67,10 +68,12 @@ h2, button {
 
 /* 3. Layout */
 
-body,
+body {
+    height: 100lvh;
+}
 main {
     height: 100dvh;
-    width: 100vw;
+    width: 100%;
 }
 main {
     display: grid;
@@ -98,16 +101,17 @@ header {
 }
 
 .expander.active {
-    padding-bottom: calc(var(--gap));
-}
-
-.expander.about {
-    margin-bottom: calc(var(--gap) * 12);
+    padding-block: calc(var(--gap));
 }
 
 .expander.info.active {
-    padding-block: calc(var(--gap)) calc(var(--gap) * 1.5);
+    padding-bottom: calc(var(--gap) * 1.5);
 }
+
+.expander.about {
+    margin-bottom: calc(var(--gap) * 6);
+}
+
 
 .expander.active .information {
     grid-template-rows: 1fr;
@@ -142,16 +146,17 @@ div.expander.active button {
     overflow: hidden;
     box-sizing: border-box;
     display: grid;
-    justify-items: center;
     text-wrap: pretty;
     hyphens: auto;
     gap: calc(var(--gap) * 1.5);
-    padding-inline: calc(var(--gap) * 3);
-}
-
-.text p {
+    padding-inline: calc(var(--gap) * 5);
     text-align: justify;
     text-align-last: center;
+    font-size: 1.1rem;
+}
+
+
+.text p {
     font-size: 1.1rem;
 }
 
@@ -208,7 +213,7 @@ div.expander.active button {
 
 /* 7. Loading and Canvas */
 .loading-container {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     box-sizing: border-box;
     z-index: 10000;
     display: flex;
