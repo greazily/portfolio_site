@@ -1,45 +1,45 @@
+/* 1. Font and Root Variables */
 @font-face {
     font-family: 'variable';
     src: url('font/ClashGrotesk-Variable.woff2') format("woff2 supports variations"),
          url('font/ClashGrotesk-Variable.woff2') format("woff2-variations");
     font-weight: 100 1000;
-  }
+}
 
 :root {
     --color: 0, 0%, 86%;
     --color2: 0, 0%, 26%;
     --gap: 0.5rem;
     --width: 100px;
-
-
     font-family: 'variable';
     font-size: 12px;
     font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-
     color: hsl(var(--color));
     background-color: hsl(var(--color2));
 }
 
-button, input[type="submit"], input[type="reset"] {
-	background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-    font-size: inherit;
-	cursor: pointer;
-	outline: inherit;
-}
-
+/* 2. Reset and Base Styles */
 body, h2, h3, p {
     font-size: 1rem;
     margin: 0;
     padding: 0;
 }
 
-h2, h3, button, span{
+button, input[type="submit"], input[type="reset"] {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    cursor: pointer;
+    outline: inherit;
+    height: 1rem;
+}
+
+h2, h3, button, span {
     text-transform: uppercase;
 }
 
@@ -50,14 +50,14 @@ h2, h3, button {
     line-height: 0;
 }
 
-.about button {
-    padding-top: 0;
-}
-
 h2, button {
     font-family: 'variable';
     font-variation-settings: "wght" 400;
     transition: font-variation-settings 400ms ease-in-out;
+}
+
+.about button {
+    padding-top: 0;
 }
 
 .title {
@@ -65,18 +65,23 @@ h2, button {
     max-width: 150px;
 }
 
+/* 3. Layout */
+
+body,
+main {
+    height: 100dvh;
+    width: 100vw;
+}
 main {
     display: grid;
     box-sizing: border-box;
     justify-items: center;
-    height: 100dvh;
-    width: 100vw;
     grid-template-rows: auto 1fr;
 }
 
 header {
     width: fit-content;
-	max-width: calc(var(--width) * 6);
+    max-width: calc(var(--width) * 6);
     display: grid;
     row-gap: var(--gap);
     justify-items: center;
@@ -85,15 +90,35 @@ header {
     background: var(--color2);
 }
 
-button {
-    display: flex;
-    align-items: center;
+/* 4. Expander/Accordion */
+.expander {
+    display: grid;
     justify-content: center;
-    height: 1rem;
+    transition: padding-block 400ms;
 }
 
-button::before {
-    display: block;
+.expander.active {
+    padding-bottom: calc(var(--gap));
+}
+
+.expander.about {
+    margin-bottom: calc(var(--gap) * 12);
+}
+
+.expander.info.active {
+    padding-block: calc(var(--gap)) calc(var(--gap) * 1.5);
+}
+
+.expander.active .information {
+    grid-template-rows: 1fr;
+}
+
+.expander.about button::before {
+    content: "about";
+}
+
+.expander.info button::before {
+    content: "info";
 }
 
 div.expander.active button::before {
@@ -106,14 +131,7 @@ div.expander.active button {
     padding-top: calc(var(--gap) * 2);
 }
 
-.expander.about button::before {
-    content: "about";
-}
-
-.expander.info button::before {
-    content: "info";
-}
-
+/* 5. Information Section */
 .information {
     display: grid;
     grid-template-rows: 0fr;
@@ -123,12 +141,12 @@ div.expander.active button {
 .text {
     overflow: hidden;
     box-sizing: border-box;
-    text-align: center;
     display: grid;
+    justify-items: center;
     text-wrap: pretty;
     hyphens: auto;
     gap: calc(var(--gap) * 1.5);
-    padding-inline: calc(var(--gap) * 2.5);
+    padding-inline: calc(var(--gap) * 3);
 }
 
 .text p {
@@ -137,32 +155,7 @@ div.expander.active button {
     font-size: 1.1rem;
 }
 
-.expander.active .information {
-    grid-template-rows: 1fr;
-    
-}
-.expander.info.active {
-    padding-block: calc(var(--gap)) calc(var(--gap) * 1.5);
-}
-
-.expander {
-    display: grid;
-    justify-content: center;
-    transition: padding-block 400ms;
-}
-
-.expander.active {
-    padding-bottom: calc(var(--gap));
-}
-
-.expander.about{
-    margin-bottom: calc(var(--gap) * 6);
-}
-
-.arrow {
-    height: 0.6rem;
-}
-
+/* 6. Marquee/Track/Items */
 .marquee, .track, .item, .part {
     box-sizing: border-box;
     display: flex;
@@ -174,18 +167,21 @@ div.expander.active button {
 }
 
 .marquee {
-	overflow: hidden;
+    overflow: hidden;
     width: 100%;
     height: 1rem;
 }
+
 .track {
     width: fit-content;
     height: 100%;
 }
+
 .part {
     height: 100%;
     width: fit-content;
-} 
+}
+
 .item {
     display: flex;
     height: 100%;
@@ -197,7 +193,7 @@ div.expander.active button {
     transition: all 400ms 200ms ease-in-out;
 }
 
-.item.active{
+.item.active {
     color: hsl(var(--color2));
     background-color: hsla(var(--color), 1);
 }
@@ -207,9 +203,10 @@ div.expander.active button {
 }
 
 .item.wide {
-    width: calc(var(--width) * 2.105);
+    width: calc(var(--width) * 2.1053);
 }
 
+/* 7. Loading and Canvas */
 .loading-container {
     font-size: 1.4rem;
     box-sizing: border-box;
@@ -241,17 +238,23 @@ div.expander.active button {
     object-fit: cover;
 }
 
-@media (min-width: 500px) {
-    :root {
-        font-size: 11px;
-    }
+/* 8. Miscellaneous */
+.arrow {
+    height: 0.6rem;
+}
 
-    .expander.about{
-        margin-bottom: calc(var(--gap) * 3);
-    }
-
+/* 9. Media Queries */
+@media (min-width: calc(600px + 36px)) {
     .text {
         padding-inline: 0;
     }
+}
 
+@media (min-width: calc(500px)) {
+    :root {
+        font-size: 11px;
+    }
+    .expander.about {
+        margin-bottom: calc(var(--gap) * 3);
+    }
 }
