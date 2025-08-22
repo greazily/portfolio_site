@@ -4,30 +4,22 @@ const allItems = gsap.utils.toArray(".item");
 const marquee = document.querySelector(".marquee");
 const track = document.querySelector(".track");
 const part = document.querySelector(".part");
-let loadingValue = document.querySelector(".loading-value");
-let canvas = document.querySelector("#canvas");
-let context = canvas.getContext("2d");
-let information = document.querySelector(".information");
-let videoLenghts = [0, 570, 1140, 2340, 2910, 3480];
-let executed = [false, false, false, false, false, false];
+const loadingValue = document.querySelector(".loading-value");
+const canvas = document.querySelector("#canvas");
+const context = canvas.getContext("2d");
+const information = document.querySelector(".information");
+const videoLengths = [0, 570, 1140, 2340, 2910, 3480];
+let executed = Array(videoLengths.length).fill(false);
 let activeInfo = 0;
-
-
 
 canvas.width = 1920;
 canvas.height = 1080;
 
-let frameCount = 4679;
-let currentFrame = index => (
-  `img/frm/${(index).toString().padStart(5, "0")}.webp`
-);
+const frameCount = 4679;
+const currentFrame = i => `img/frm/${i.toString().padStart(5, "0")}.webp`;
 
-let progression = 0.01
-let images = []
-let sequence = {
-  frame: 0
-};
-
+let images = [];
+let sequence = { frame: 0 };
 let imagesToLoad = frameCount;
 
 for (let i = 0; i < frameCount; i++) {
@@ -35,102 +27,52 @@ for (let i = 0; i < frameCount; i++) {
   img.onload = onLoad;
   img.src = currentFrame(i);
   images.push(img);
-};
+}
 
 function indexOfActive() {
-  let info = document.querySelector(".expander.info");
+  const info = document.querySelector(".expander.info");
   if (info.classList.contains("active")) {
-    activeInfo = executed.indexOf(true);
+    activeInfo = executed.findIndex(Boolean);
   }
-};
+}
 
 function infoLoop(progress) {
-  console.log(activeInfo, videoLenghts.length);
-  if( activeInfo != videoLenghts.length - 1){
-    if((videoLenghts[activeInfo + 1] / frameCount).toFixed(3) == progress.toFixed(3)){
-      track.t1.progress(videoLenghts[activeInfo] / frameCount);   
+  if (activeInfo !== videoLengths.length - 1) {
+    if ((videoLengths[activeInfo + 1] / frameCount).toFixed(3) === progress.toFixed(3)) {
+      track.t1.progress(videoLengths[activeInfo] / frameCount);
     }
-  } else {
-    if(0 == progress.toFixed(0)) {
-      track.t1.progress(videoLenghts[activeInfo] / frameCount);   
-    }
+  } else if (progress.toFixed(0) == 0) {
+    track.t1.progress(videoLengths[activeInfo] / frameCount);
   }
-};
+}
 
 function progressChecker(progress) {
-  let infoBtn = document.querySelector(".expander.info");
-  if (progress >= 0 / frameCount && progress < videoLenghts[1] / frameCount){
-    projectChanger(0);
+  const infoBtn = document.querySelector(".expander.info");
+  for (let i = 0; i < videoLengths.length; i++) {
+    const start = videoLengths[i] / frameCount;
+    const end = videoLengths[i + 1] ? videoLengths[i + 1] / frameCount : 1;
+    if (progress >= start && progress < end) {
+      projectChanger(i);
+      break;
+    }
   }
-  else if (progress >= videoLenghts[1] / frameCount && progress < videoLenghts[2] / frameCount){
-    projectChanger(1);
-  } 
-  else if (progress >= videoLenghts[2] / frameCount && progress < videoLenghts[3] / frameCount){
-    projectChanger(2);
-  } 
-  else if (progress >= videoLenghts[3] / frameCount && progress < videoLenghts[4] / frameCount){
-    projectChanger(3);
-  } 
-  else if (progress >= videoLenghts[4] / frameCount && progress < videoLenghts[5] / frameCount){
-    projectChanger(4);
-  } 
-  else if (progress >= videoLenghts[5] / frameCount && progress < frameCount){
-    projectChanger(5);
-  } 
-
-  if (infoBtn.classList.contains("active")) {
-    infoLoop(progress);
-  }
-};
+  if (infoBtn.classList.contains("active")) infoLoop(progress);
+}
 
 function projectChanger(number) {
-  let infoBtn = document.querySelector(".expander.info");
-  if (infoBtn.classList.contains("active")) {
-    infoLoop(number);
-  }
-  if(number == 0 && !executed[0]){
-    resetArr()
-    executed[0] = true;
+  const infoBtn = document.querySelector(".expander.info");
+  if (infoBtn.classList.contains("active")) infoLoop(number);
+  if (!executed[number]) {
+    executed.fill(false);
+    executed[number] = true;
     infoSet(number);
   }
-  else if (number == 1 && !executed[1]){
-    resetArr()
-    executed[1] = true;
-    infoSet(number);
-  }
-  else if (number == 2 && !executed[2]){
-    resetArr()
-    executed[2] = true;
-    infoSet(number);
-  }
-  else if (number == 3 && !executed[3]){
-    resetArr()
-    executed[3] = true;
-    infoSet(number);
-  }
-  else if (number == 4 && !executed[4]){
-    resetArr()
-    executed[4] = true;
-    infoSet(number);
-  }
-  else if (number == 5 && !executed[5]){
-    resetArr()
-    executed[5] = true;
-    infoSet(number);
-  }
-
-
-};
-
-function resetArr() {
-  for (let i = 0; i < executed.length; i++){executed[i] = false;}
-};
+}
 
 function infoSet(index) {
-
-  let inactive = document.querySelectorAll(".item");
-  let active = document.querySelectorAll(".i" + index);
-  let paragraph = document.querySelector(".expander.info .text");
+  const inactive = document.querySelectorAll(".item");
+  const active = document.querySelectorAll(".i" + index);
+  const paragraph = document.querySelector(".expander.info .text");
   const insights = [
     "<p>London, England</p><span>2023</span><p>Data Desk provides NGOs, think tanks, and media outlets with investigative research and analysis on the global oil and gas sector. Their work has appeared in <i>The Washington Post, The Guardian, Bloomberg, and Le Monde.</i> For instance—identifiing sanctions-busting shipments of jet fuel to Myanmar.</p><p>I was brought in to design their identity, website, data visualizations, and documents, with the challenge of appealing to two audiences: one seeking scientific rigor, the other drawn to innovative philanthropic approaches.</p><p>The solution embraced a paradox at the heart of data: it captures concrete realities, yet its representation often feels abstract and intangible. This duality became the foundation of the visual concept, inspiring impossible geometry that conveys certainty through disambiguation, while adjustable columns in the layout allow readers to navigate the information according to their perspective. The typeface Inter was chosen for its modern clarity, while the wordmark—customized with inspiration from Akzidenz Grotesk—balances authority with subtle personality, resulting in a confident, logical, yet approachable visual voice that resonates across both audiences.</p>",
 
@@ -144,66 +86,54 @@ function infoSet(index) {
 
     "<p>Multiple Locations</p><span>2022–25</span>This is a collection of select projects spanning different stages of my creative practice. It includes experimental interactive websites—taking the reader through my favorite passage from Carl Sagan, another exploring public perceptions of mental health medication—as well as my final major project, an identity system for children’s toys made from recycled pizza boxes.<br><br>More recently, I’ve explored laser-cut furniture design as a hands-on, material-focused hobby, extending my interest in function, form, and making."
   ];
-
   paragraph.innerHTML = insights[index];
+  inactive.forEach(el => el.classList.remove("active"));
+  active.forEach(el => el.classList.add("active"));
+}
 
-  inactive.forEach((inactivate) => inactivate.classList.remove("active"));
-  active.forEach((activate) => activate.classList.add("active"));
-
-};
-
-
-function infoButtons(){
-  let buttons = document.querySelectorAll(".expander button");
-  let expanders = document.querySelectorAll(".expander");
-  buttons.forEach((button) => {
-    button.addEventListener("click", function(){
-      if(this.parentElement.classList.contains("active")){
-        expanders.forEach((expander) => {
-          expander.classList.remove("active");
-        });
-      } else {
-        expanders.forEach((expander) => {
-          expander.classList.remove("active");
-        });
+function infoButtons() {
+  const buttons = document.querySelectorAll(".expander button");
+  const expanders = document.querySelectorAll(".expander");
+  buttons.forEach(button => {
+    button.addEventListener("click", function () {
+      const wasActive = this.parentElement.classList.contains("active");
+      expanders.forEach(expander => expander.classList.remove("active"));
+      if (!wasActive) {
         this.parentElement.classList.add("active");
         indexOfActive();
-      };
+      }
     });
   });
-};
+}
 
 function partAdder() {
   for (let i = 0; i < 2; i++) {
-    let partClone = part.cloneNode(true);
-    track.appendChild(partClone);
+    track.appendChild(part.cloneNode(true));
   }
-
-};
+}
 
 function render() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.drawImage(images[sequence.frame], 0, 0);
-};
+}
 
 let imageSequencer = gsap.to(sequence, {
   frame: frameCount - 1,
   snap: "frame",
   ease: "none",
   paused: true,
-  onUpdate: render 
+  onUpdate: render
 });
 
 track.t1 = gsap.timeline({
   paused: true,
-  repeat: -1, 
+  repeat: -1,
   onUpdate() {
     imageSequencer.progress(this.progress());
     progressChecker(this.progress());
   }
-})
-.to(".track", {
-  duration: frameCount/30,
+}).to(".track", {
+  duration: frameCount / 30,
   x: part.offsetWidth * -1,
   ease: "none"
 });
@@ -214,49 +144,34 @@ proxy.style.backgroundColor = "red";
 Draggable.create(proxy, {
   type: 'x',
   trigger: track,
-  onDragStart: function() {
-    track.t1.pause();
-  },
-  onDrag: function() {
+  onDragStart() { track.t1.pause(); },
+  onDrag() {
     let x = (this.x * -1) % part.offsetWidth;
-    if( x < 0 ) {
-        track.t1.progress(x/part.offsetWidth + 1);
-        // console.log(this.x, x % part.offsetWidth, x/part.offsetWidth);
-      } else {
-        track.t1.progress(x/part.offsetWidth);
-      }
+    track.t1.progress(x / part.offsetWidth + (x < 0 ? 1 : 0));
   },
-  onDragEnd: function() {
+  onDragEnd() {
     track.t1.play();
     indexOfActive();
   },
-  onPress: function() {
-    gsap.set(this.target, {
-      x: gsap.getProperty(track, "x")
-    });
+  onPress() {
+    gsap.set(this.target, { x: gsap.getProperty(track, "x") });
     this.update();
   }
 });
 
-
-
 function onLoad() {
   imagesToLoad--;
   this.onload = null;
-  let percent = Math.round((frameCount - imagesToLoad) / frameCount * 100 * 4)
-  if(percent <= 100){
-    loadingValue.textContent = percent + "%";
-  }
-  
+  let percent = Math.round((frameCount - imagesToLoad) / frameCount * 100 * 4);
+  if (percent <= 100) loadingValue.textContent = percent + "%";
   if (percent == 100) {
     gsap.set(canvas, { autoAlpha: 1 });
-    gsap.to(".loading-container", { 
+    gsap.to(".loading-container", {
       autoAlpha: 0,
-      onComplete: function(){
-        track.t1.play();
-      }
-    });    
+      onComplete: () => track.t1.play()
+    });
   }
 }
+
 partAdder();
 infoButtons();
