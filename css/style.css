@@ -7,8 +7,11 @@
 }
 
 :root {
+    --color: 30, 33%, 5%;
     --color: 0, 0%, 86%;
-    --color2: 0, 0%, 26%;
+    /* --color: 0, 0%, 90%; */
+    /* --color2: 0, 0%, 26%; */
+    --color2: 50, 2%, 52%;
     --gap: 0.5rem;
     --width: 100px;
     font-family: 'variable';
@@ -22,9 +25,10 @@
 }
 
 /* 2. Reset and Base Styles */
-body, h2, h3, p {
+body, h2, h3, button, p{
     font-size: 1rem;
     font-weight: 400;
+    font-variation-settings: "wght" 440;
     margin: 0;
     padding: 0;
 }
@@ -38,6 +42,7 @@ button, input[type="submit"], input[type="reset"] {
     cursor: pointer;
     outline: inherit;
     height: 1rem;
+    width: var(--width);
 }
 
 h2, button {
@@ -46,19 +51,13 @@ h2, button {
 
 h2, button {
     box-sizing: border-box;
-    padding-top: 0.15em;
     vertical-align: middle;
     line-height: 0;
-}
-
-h2, button {
     font-family: 'variable';
-    font-variation-settings: "wght" 400;
-    transition: font-variation-settings 400ms ease-in-out;
 }
 
-.about button {
-    padding-top: 0;
+.item, button {
+    padding-top: 0.05em;
 }
 
 .title {
@@ -67,7 +66,6 @@ h2, button {
 }
 
 /* 3. Layout */
-
 body {
     height: 100lvh;
 }
@@ -81,58 +79,48 @@ main {
     justify-items: center;
     grid-template-rows: auto 1fr;
 }
-
 header {
+    box-sizing: border-box;
     width: fit-content;
     max-width: calc(var(--width) * 6);
     display: grid;
-    row-gap: var(--gap);
     justify-items: center;
-    padding-block: var(--gap);
-    box-sizing: border-box;
+    margin-top: var(--gap);
     background: var(--color2);
 }
 
 /* 4. Expander/Accordion */
 .expander {
     display: grid;
-    justify-content: center;
+    justify-items: center;
     transition: padding-block 400ms;
-}
-
-.expander.active {
-    padding-block: calc(var(--gap));
-}
-
-.expander.info.active {
-    padding-bottom: calc(var(--gap) * 1.5);
+    padding-block: calc(var(--gap) * 0.7);
 }
 
 .expander.about {
     margin-bottom: calc(var(--gap) * 6);
 }
 
+.expander.active {
+    gap: calc(var(--gap)* 1.5);
+    padding-block: calc(var(--gap) * 1.5);
+}
 
 .expander.active .information {
     grid-template-rows: 1fr;
 }
 
+/* Button content change */
 .expander.about button::before {
     content: "about";
 }
-
 .expander.info button::before {
     content: "info";
 }
-
 div.expander.active button::before {
     content: "×";
     font-size: 2rem;
     font-variation-settings: "wght" 300;
-}
-
-div.expander.active button {
-    padding-top: calc(var(--gap) * 2);
 }
 
 /* 5. Information Section */
@@ -155,16 +143,16 @@ div.expander.active button {
     font-size: 1.1rem;
 }
 
-
 .text p {
     font-size: 1.1rem;
 }
 
 /* 6. Marquee/Track/Items */
-.marquee, .track, .item, .part {
-    box-sizing: border-box;
+.marquee, .track, .item, .part , button{
     display: flex;
+    box-sizing: border-box;
     align-items: center;
+    justify-content: center;
 }
 
 .marquee, .item {
@@ -172,39 +160,29 @@ div.expander.active button {
 }
 
 .marquee {
-    overflow: hidden;
+    overflow-x: hidden;
     width: 100%;
-    height: 1rem;
+    height: 1.4rem;
 }
 
-.track {
+.track, .part {
     width: fit-content;
     height: 100%;
-}
-
-.part {
-    height: 100%;
-    width: fit-content;
 }
 
 .item {
-    display: flex;
     height: 100%;
     border-inline: 1px solid hsl(var(--color2));
     width: var(--width);
     flex-shrink: 0;
     will-change: transform;
     background-color: hsla(var(--color), 0.07);
-    transition: all 400ms 200ms ease-in-out;
+    transition: all 400ms 100ms ease-in-out;
 }
 
 .item.active {
     color: hsl(var(--color2));
     background-color: hsla(var(--color), 1);
-}
-
-.item h2 {
-    margin-top: -0.06em;
 }
 
 .item.wide {
@@ -246,6 +224,7 @@ div.expander.active button {
 /* 8. Miscellaneous */
 .arrow {
     height: 0.6rem;
+    margin-bottom: calc(var(--gap) * 0.7);
 }
 
 /* 9. Media Queries */
