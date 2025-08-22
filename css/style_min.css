@@ -1,4 +1,3 @@
-/* 1. Font and Root Variables */
 @font-face {
   font-family: 'variable';
   src: url('font/ClashGrotesk-Variable.woff2') format("woff2 supports variations"),
@@ -22,7 +21,6 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-/* 2. Reset and Base Styles */
 body, h2, h3, button, p {
   margin: 0;
   padding: 0;
@@ -51,9 +49,8 @@ h2, button {
   transition: font-variation-settings 400ms ease-in-out;
 }
 
-.title { width: 100%; max-width: 150px; }
+.tl { width: 100%; max-width: 150px; }
 
-/* 3. Layout */
 body { height: 100lvh; }
 
 main {
@@ -71,37 +68,34 @@ header {
   justify-items: center;
   margin-top: var(--gap);
   background: var(--color2);
-  /* padding-block: var(--gap); */
 }
 
-/* 4. Expander/Accordion */
-.expander {
+.ex {
   display: grid;
   justify-items: center;
   transition: padding-block 400ms;
   padding-block: calc(var(--gap) * 0.7);
 }
-.expander.about { margin-bottom: calc(var(--gap) * 6); }
-.expander.active {
+.ex.ab { margin-bottom: calc(var(--gap) * 6); }
+.ex.active {
   gap: calc(var(--gap) * 1.5);
   padding-block: calc(var(--gap) * 1.5);
 }
-.expander.active .information { grid-template-rows: 1fr; }
-.expander.about button::before { content: "about"; }
-.expander.info button::before { content: "info"; }
-.expander.active button::before {
+.ex.active .if { grid-template-rows: 1fr; }
+.ex.ab .bt::before { content: "about"; }
+.ex.in .bt::before { content: "info"; }
+.ex.active .bt::before {
   content: "×";
   font-size: 2rem;
   font-variation-settings: "wght" 300;
 }
 
-/* 5. Information Section */
-.information {
+.if {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 400ms;
 }
-.text {
+.tx {
   overflow: hidden;
   display: grid;
   gap: calc(var(--gap) * 1.5);
@@ -112,24 +106,23 @@ header {
   hyphens: auto;
   text-wrap: pretty;
 }
-.text p { font-size: 1.1rem; }
+.tx p { font-size: 1.1rem; }
 
-/* 6. Marquee/Track/Items */
-.marquee, .track, .item, .part, button {
+.mq, .tr, .it, .pt, button {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.marquee {
+.mq {
   overflow-x: hidden;
   width: 100%;
   height: 1.4rem;
 }
-.track, .part {
+.tr, .pt {
   width: fit-content;
   height: 100%;
 }
-.item {
+.it {
   height: 100%;
   border-inline: 1px solid hsl(var(--color2));
   width: var(--width);
@@ -139,14 +132,13 @@ header {
   transition: all 400ms 100ms ease-in-out;
   padding-top: 0.05em;
 }
-.item.active {
+.it.active {
   color: hsl(var(--color2));
   background-color: hsla(var(--color), 1);
 }
-.item.wide { width: calc(var(--width) * 2.1053); }
+.it.wd { width: calc(var(--width) * 2.1053); }
 
-/* 7. Loading and Canvas */
-.loading-container {
+.lc {
   font-size: 1.3rem;
   z-index: 10000;
   display: flex;
@@ -158,30 +150,28 @@ header {
   height: 100%;
 }
 
-.canvas-container, #canvas {
+.cc, #c {
   width: 100%;
   height: 100%;
 }
-.canvas-container {
+.cc {
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
-#canvas {
+#c {
   display: block;
   object-fit: cover;
 }
 
-/* 8. Miscellaneous */
-.arrow {
+.ar {
   height: 0.6rem;
   margin-bottom: calc(var(--gap) * 0.7);
 }
 
-/* 9. Media Queries */
 @media (min-width: 636px) {
   :root { font-size: 11px; }
-  .expander.about { margin-bottom: calc(var(--gap) * 3); }
-  .text { padding-inline: 0; }
+  .ex.ab { margin-bottom: calc(var(--gap) * 3); }
+  .tx { padding-inline: 0; }
 }
