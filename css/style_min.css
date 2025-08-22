@@ -51,8 +51,6 @@ h2, button {
 
 .tl { width: 100%; max-width: 150px; }
 
-body { height: 100lvh; }
-
 main {
   display: grid;
   justify-items: center;
