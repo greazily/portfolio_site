@@ -24,5 +24,5 @@ let A=gsap.to(p,{frame:l-1,snap:"frame",ease:"none",paused:!0,onUpdate:z1});
 c.t1=gsap.timeline({paused:!0,repeat:-1,onUpdate(){A.progress(this.progress()),u(this.progress())}}).to(".tr",{duration:l/30,x:d.offsetWidth*-1,ease:"none"});
 const B=document.createElement("div");
 B.style.backgroundColor="red",Draggable.create(B,{type:"x",trigger:c,onDragStart(){c.t1.pause()},onDrag(){let n=(this.x*-1)%d.offsetWidth;c.t1.progress(n/d.offsetWidth+(n<0?1:0))},onDragEnd(){c.t1.play(),s()},onPress(){gsap.set(this.target,{x:gsap.getProperty(c,"x")}),this.update()}});
-function w(n){q--,this.onload=null;let r=Math.round((l-q)/l*100*6);r<=100&&(e.textContent=r+"%"),100==r&&(gsap.set(f,{autoAlpha:1}),gsap.to(".lc",{autoAlpha:0,onComplete:()=>c.t1.play()}))}
+function w(n){q--,this.onload=null;let r=Math.round((l-q)/l*100*8);r<=100&&(e.textContent=r+"%"),100==r&&(gsap.set(f,{autoAlpha:1}),gsap.to(".lc",{autoAlpha:0,onComplete:()=>c.t1.play()}))}
 y1(),x1();
