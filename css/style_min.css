@@ -4,7 +4,7 @@
 body,h2,h3,button,p{margin:0;padding:0;font-family:'v';font-size:1rem;font-weight:400;font-variation-settings:"wght" 440}
 button,input[type="submit"],input[type="reset"]{background:none;color:inherit;border:none;padding:0;font-size:inherit;cursor:pointer;outline:none;width:var(--w);height:1rem}
 h2,button{text-transform:uppercase;vertical-align:middle;line-height:0;transition:font-variation-settings 400ms ease-in-out}
-.tl{width:100%;max-width:200px}
+.tl{width:100%;max-width:195px}
 main{display:grid;justify-items:center;grid-template-rows:auto 1fr;height:100dvh;width:100vw}
 header{width:fit-content;display:grid;justify-items:center;margin-top:var(--g);background:var(--c2);max-width:calc(var(--w)*8);}
 .ex{display:grid;justify-items:center;transition:padding-block 400ms;padding-block:calc(var(--g)*.7)}
